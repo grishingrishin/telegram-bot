@@ -1,2 +1,2 @@
-require('dotenv').config();
-import bot from './bot';
+import { Telegram } from 'telegraf';
+export default new Telegram(process.env.TELEGRAM_TOKEN, {});
