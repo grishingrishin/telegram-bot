@@ -8,6 +8,7 @@ mongoose.connect(`mongodb://localhost:${process.env.PORT}/`, { useNewUrlParser: 
 const db = mongoose.connection;
 
 db.on('error', err => logger.error(`Failed to connect to DB ${err}`));
+db.on('disconnected', () => logger.debug('Mongoose connection to DB disconnected'));
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
@@ -15,8 +16,6 @@ db.once('open', () => {
     bot.start(ctx => ctx.reply('Goodbye world'));
     bot.launch();
 });
-
-mongoose.connection.on('disconnected', () => logger.debug('Mongoose connection to DB disconnected'));
 
 // Enable graceful stop
 process.on('SIGINT', () => gracefulExit).on('SIGTERM', () => gracefulExit);
