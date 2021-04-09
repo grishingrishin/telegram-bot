@@ -14,8 +14,4 @@ const logger = createLogger({
     format: combine(timestamp(), format.splat(), format.simple(), logFormat),
 });
 
-if (process.env.NODE_ENV !== 'production') {
-    logger.debug('Logging initialized at debug level');
-}
-
 export default logger;
