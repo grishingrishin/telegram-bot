@@ -4,8 +4,6 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "npm run start-db && npm run watch",
-        "start-db": "start /D \"C:/mongodb/bin/ \" mongod.exe",
         "server": "node dist/bot.js",
         "serve-debug": "nodemon --inspect dist/bot.js",
         "build": "npm run build-ts && npm run tslint",
@@ -22,11 +20,13 @@
     "dependencies": {
         "dotenv": "^8.2.0",
         "mongoose": "^5.12.3",
+        "node-fetch": "^2.6.1",
         "telegraf": "^4.3.0",
         "winston": "^3.3.3"
     },
     "devDependencies": {
         "@types/node": "^14.14.37",
+        "@types/node-fetch": "^2.5.10",
         "concurrently": "^6.0.1",
         "cross-env": "^7.0.3",
         "nodemon": "^2.0.7",
