@@ -1,6 +1,6 @@
 require('dotenv').config();
 import { Telegraf } from 'telegraf';
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
 
@@ -13,10 +13,9 @@ bot.on('message', ctx => {
 
     const apiPath = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&rating=g&lang=en&q=${value}`;
 
-    fetch(apiPath)
-        .then(res => res.json())
-        .then(json => {
-            const { data } = json;
+    axios(apiPath)
+        .then(resp => {
+            const { data } = resp.data;
             const randomFile = data[Math.floor(Math.random() * data.length)];
             ctx.replyWithDocument(randomFile.images.original.mp4);
         })
