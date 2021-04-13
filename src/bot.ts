@@ -1,5 +1,5 @@
 require('dotenv').config();
-import { Telegraf, Context } from 'telegraf';
+import { Telegraf } from 'telegraf';
 import fetch from 'node-fetch';
 
 const bot = new Telegraf(process.env.TELEGRAM_TOKEN);
@@ -19,7 +19,8 @@ bot.on('message', ctx => {
             const { data } = json;
             const randomFile = data[Math.floor(Math.random() * data.length)];
             ctx.replyWithDocument(randomFile.images.original.mp4);
-        });
+        })
+        .catch(() => ctx.reply('Oops something went wrong nothing found for your request!'));
 });
 
 bot.launch();
